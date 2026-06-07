@@ -15,10 +15,24 @@ interface PokemonType{
 }
 
 const colorByType={
-  grass:'green',
-  fire:'orange',
-  bug:'green',
-  water:'blue'
+  normal: "#A8A77A",
+  fire: "#EE8130",
+  water: "#6390F0",
+  electric: "#F7D02C",
+  grass: "#7AC74C",
+  ice: "#96D9D6",
+  fighting: "#C22E28",
+  poison: "#A33EA1",
+  ground: "#E2BF65",
+  flying: "#A98FF3",
+  psychic: "#F95587",
+  bug: "#A6B91A",
+  rock: "#B6A136",
+  ghost: "#735797",
+  dragon: "#6F35FC",
+  dark: "#705746",
+  steel: "#B7B7CE",
+  fairy: "#D685AD",
 }
 
 export default function Index() {
@@ -80,7 +94,7 @@ useEffect(()=>{
       {pokemon.map((pokemons) => (
   <View key={pokemons.name}
   //@ts-ignore
-  style={{backgroundColor:colorByType[pokemons.types[0].type.name]}}>//on the (type) basis background color will change
+  style={{backgroundColor:colorByType[pokemons.types[0].type.name]+50}}>//on the (type) basis background color will change    +50 is opacity for background
     <Text style={styles.name}>{pokemons.name}</Text>
     <Text style={styles.type}>{pokemons.types[0].type.name}</Text>
     <View style={{flexDirection:'row'}}>
