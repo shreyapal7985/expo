@@ -5,13 +5,15 @@ export default function RootLayout() {
   <Stack.Screen
   name="index"  //this is file name
   options={{
-    title:'Home' // changed file name
+    title:'Home' ,// changed file name
+    headerTitleAlign:'center'
   }}/>
 
   <Stack.Screen
   name="details"
   options={{
-    title:'Details'
+    title:'Details',
+    headerTitleAlign:'center'
   }}/>
   </Stack>;
 }
