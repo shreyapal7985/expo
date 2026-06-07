@@ -1,5 +1,6 @@
+import { Link } from "expo-router";
 import { useEffect,useState } from "react";
-import { Text, View, StyleSheet, ScrollView, Image } from "react-native";
+import { Text, View, StyleSheet, ScrollView, Image, Pressable } from "react-native";
 
 interface Pokemon{
   name:string
@@ -92,9 +93,13 @@ useEffect(()=>{
       padding:16
     }}>
       {pokemon.map((pokemons) => (
-  <View key={pokemons.name}
+        <Link key={pokemons.name}
+        href={"/details"}>
+  <View 
   //@ts-ignore
-  style={{backgroundColor:colorByType[pokemons.types[0].type.name]+50}}>//on the (type) basis background color will change    +50 is opacity for background
+  style={{backgroundColor:colorByType[pokemons.types[0].type.name]+50, padding:20,borderColor:"red",borderWidth:2,
+    borderRadius:20
+  }}>//on the (type) basis background color will change    +50 is opacity for background
     <Text style={styles.name}>{pokemons.name}</Text>
     <Text style={styles.type}>{pokemons.types[0].type.name}</Text>
     <View style={{flexDirection:'row'}}>
@@ -106,6 +111,7 @@ useEffect(()=>{
     style={{height:160, width:160}}/>
   </View>
   </View>
+  </Link>
 ))}
     </ScrollView>
   );
@@ -113,12 +119,14 @@ useEffect(()=>{
  const styles=StyleSheet.create({
   name:{
     fontSize:28,
-    fontWeight:'bold'
+    fontWeight:'bold',
+    textAlign:'center'
   },
   type:{
     fontSize:20,
     fontWeight:'bold',
-    color:'grey'
+    color:'grey',
+    textAlign:'center'
   }
  })
 
