@@ -94,12 +94,12 @@ useEffect(()=>{
     }}>
       {pokemon.map((pokemons) => (
         <Link key={pokemons.name}
-        href={"/details"}>
-  <View 
-  //@ts-ignore
-  style={{backgroundColor:colorByType[pokemons.types[0].type.name]+50, padding:20,borderColor:"red",borderWidth:2,
-    borderRadius:20
-  }}>//on the (type) basis background color will change    +50 is opacity for background
+        href={"/details"}
+        //@ts-ignore
+         style={{backgroundColor:colorByType[pokemons.types[0].type.name]+50, padding:20,borderColor:"red",borderWidth:2,
+    borderRadius:20 //on the (type) basis background color will change    +50 is opacity for background
+  }}>
+  <View>
     <Text style={styles.name}>{pokemons.name}</Text>
     <Text style={styles.type}>{pokemons.types[0].type.name}</Text>
     <View style={{flexDirection:'row'}}>
