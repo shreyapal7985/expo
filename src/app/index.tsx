@@ -94,7 +94,7 @@ useEffect(()=>{
     }}>
       {pokemon.map((pokemons) => (
         <Link key={pokemons.name}
-        href={"/details"}
+        href={{pathname:"/details", params:{name: pokemons.name}}}
         //@ts-ignore
          style={{backgroundColor:colorByType[pokemons.types[0].type.name]+50, padding:20,borderColor:"red",borderWidth:2,
     borderRadius:20 //on the (type) basis background color will change    +50 is opacity for background
