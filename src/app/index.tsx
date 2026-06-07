@@ -37,7 +37,7 @@ const colorByType={
 }
 
 export default function Index() {
-  const [pokemon,setPokemon]=useState<Pokemon[]>([])//we pass empty array for bulk of data    any[] is the type of array value
+  const [pokemon,setPokemon]=useState<Pokemon[]>([])//we pass empty array for bulk of data    any[] is the type of array value   Because React never enters the callback when the array is empty.that'why it does not throw an error
   console.log(JSON.stringify(pokemon[0], null, 2))
 
   //Api fuction
@@ -81,11 +81,15 @@ catch(error){
   console.log(error)
 } } 
 
+
+
  //calling Api
 useEffect(()=>{
   getdata()
 },[])
   
+
+
   return (
     <ScrollView 
     contentContainerStyle={{
@@ -93,9 +97,9 @@ useEffect(()=>{
       padding:16
     }}>
       {pokemon.map((pokemons) => (
-        <Link key={pokemons.name}
-        href={{pathname:"/details", params:{name: pokemons.name}}}
-        //@ts-ignore
+        <Link key={pokemons.name}//use to link details.tsx file 
+        href={{pathname:"/details", params:{name: pokemons.name}}}// because the details screen needs to know which Pokémon was clicked.
+        //@ts-ignore //used to ignore the red underline
          style={{backgroundColor:colorByType[pokemons.types[0].type.name]+50, padding:20,borderColor:"red",borderWidth:2,
     borderRadius:20 //on the (type) basis background color will change    +50 is opacity for background
   }}>
@@ -116,6 +120,9 @@ useEffect(()=>{
     </ScrollView>
   );
 }
+
+//Stylesheet
+
  const styles=StyleSheet.create({
   name:{
     fontSize:28,
