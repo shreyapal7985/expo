@@ -5,7 +5,7 @@ interface Pokemon{
   name:string
   image:string
   imageBack:string
-  types:PokemonType
+  types:PokemonType[]
 }
 
 interface PokemonType{
@@ -14,13 +14,21 @@ interface PokemonType{
   url:string}
 }
 
+const colorByType={
+  grass:'green',
+  fire:'orange',
+  bug:'green',
+  water:'blue'
+}
+
 export default function Index() {
   const [pokemon,setPokemon]=useState<Pokemon[]>([])//we pass empty array for bulk of data    any[] is the type of array value
+  console.log(JSON.stringify(pokemon[0], null, 2))
 
   //Api fuction
   const getdata= async()=>{
     try{
-    const url="https://pokeapi.co/api/v2/pokemon/?limit=20&offset=20"
+    const url="https://pokeapi.co/api/v2/pokemon/?limit=20"
     const data= await fetch(url);
     const result=await data.json();
 
@@ -34,6 +42,15 @@ export default function Index() {
           image:details.sprites.front_default,
           imageBack:details.sprites.back_default,
           types:details.types
+          /* types: [
+    {
+      slot: 1,
+      type: {
+        name: "grass",
+        url: "https://pokeapi.co/api/v2/type/12/"
+      }
+    },
+ */
         };
       })
     );
@@ -55,22 +72,40 @@ useEffect(()=>{
 },[])
   
   return (
-    <ScrollView>
+    <ScrollView 
+    contentContainerStyle={{
+      gap:16,
+      padding:16
+    }}>
       {pokemon.map((pokemons) => (
-  <View key={pokemons.name}>
-    <Text>{pokemons.name}</Text>
+  <View key={pokemons.name}
+  //@ts-ignore
+  style={{backgroundColor:colorByType[pokemons.types[0].type.name]}}>//on the (type) basis background color will change
+    <Text style={styles.name}>{pokemons.name}</Text>
+    <Text style={styles.type}>{pokemons.types[0].type.name}</Text>
     <View style={{flexDirection:'row'}}>
     <Image
     source={{uri: pokemons.image}}
-    style={{height:100, width:100}}/>
+    style={{height:160, width:160}}/>
     <Image
     source={{uri: pokemons.imageBack}}
-    style={{height:100, width:100}}/>
+    style={{height:160, width:160}}/>
   </View>
   </View>
 ))}
     </ScrollView>
   );
 }
+ const styles=StyleSheet.create({
+  name:{
+    fontSize:28,
+    fontWeight:'bold'
+  },
+  type:{
+    fontSize:20,
+    fontWeight:'bold',
+    color:'grey'
+  }
+ })
 
 
